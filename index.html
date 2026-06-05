@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Modul oleh kelompok 3 media pembelajaran TP A 25</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#edd1ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col antialiased">
+
+    <header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/60 dark:border-slate-800/60 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+            
+            <div class="flex items-center space-x-3 truncate">
+                <div class="bg-gradient-to-tr from-indigo-500 to-violet-600 text-white p-2.5 rounded-2xl shadow-lg shadow-indigo-500/20 shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                </div>
+                <div class="truncate">
+                    <h1 id="modul-title" class="font-bold text-sm sm:text-base text-slate-900 dark:text-white tracking-tight truncate">Memuat...</h1>
+                    <div class="flex items-center space-x-2 mt-0.5">
+                        <span class="inline-flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span class="text-[10px] sm:text-xs font-medium text-slate-500 dark:text-slate-400">E-Modul Mode Aktif</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-2 shrink-0">
+                <div class="hidden sm:flex items-center bg-slate-100 dark:bg-slate-800 rounded-xl p-1 border border-slate-200/40 dark:border-slate-700/40">
+                    <button onclick="changeFontSize(-2)" class="p-1.5 hover:bg-white dark:hover:bg-slate-700 rounded-lg text-xs font-bold transition" title="Perkecil Teks">A-</button>
+                    <button onclick="changeFontSize(2)" class="p-1.5 hover:bg-white dark:hover:bg-slate-700 rounded-lg text-xs font-bold transition" title="Perbesar Teks">A+</button>
+                </div>
+
+                <button onclick="toggleTheme()" class="p-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl hover:scale-105 transition border border-slate-200/40 dark:border-slate-700/40">
+                    <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"></svg>
+                </button>
+
+                <button onclick="toggleEditor()" class="bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 px-3 py-2 rounded-xl text-xs font-semibold shadow-sm transition flex items-center space-x-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                    <span class="hidden md:inline">Kelompok 3</span>
+                </button>
+
+                <button onclick="toggleSidebar()" class="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                </button>
+            </div>
+        </div>
+        
+        <div class="w-full bg-slate-100 dark:bg-slate-800 h-1 relative overflow-hidden">
+            <div id="progress-bar" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-1 w-0 transition-all duration-500 ease-out"></div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 flex-1 py-6 flex flex-col lg:flex-row gap-6 relative">
+        
+        <aside id="sidebar" class="w-72 bg-white/70 dark:bg-slate-900/70 border border-slate-200/60 dark:border-slate-800/60 backdrop-blur-md rounded-2xl p-4 shadow-sm hidden lg:block shrink-0 h-[calc(100vh-140px)] sticky top-24 overflow-y-auto custom-scrollbar transition-all">
+            <div class="flex items-center justify-between mb-4 px-2">
+                <h3 class="font-bold text-slate-400 dark:text-slate-500 text-[11px] uppercase tracking-widest">Daftar Isi</h3>
+                <span id="completion-badge" class="text-[10px] font-bold px-2 py-0.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 rounded-md border border-indigo-100 dark:border-indigo-900/50">0% Selesai</span>
+            </div>
+            <nav id="toc-list" class="space-y-1.5">
+                </nav>
+        </aside>
+
+        <main class="flex-1 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/60 rounded-2xl shadow-xl shadow-slate-100/40 dark:shadow-none p-6 md:p-8 flex flex-col justify-between min-h-[550px] relative transition-all">
+            
+            <div id="content-area" class="flex-1 flex flex-col justify-center">
+                </div>
+
+        </main>
+    </div>
+
+    <footer class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-t border-slate-200/60 dark:border-slate-800/60 py-4 sticky bottom-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+            <button id="btn-prev" onclick="prevPage()" class="flex items-center space-x-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 px-4 py-2.5 rounded-xl font-medium text-sm transition disabled:opacity-30 disabled:cursor-not-allowed">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                <span>Sebelumnya</span>
+            </button>
+            
+            <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-3 py-2 rounded-xl">
+                 <span id="page-indicator" class="text-indigo-600 dark:text-indigo-400 font-bold">1</span> / <span id="total-indicator" class="font-bold">1</span> 
+            </div>
+
+            <button id="btn-next" onclick="nextPage()" class="flex items-center space-x-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white px-5 py-2.5 rounded-xl font-medium text-sm transition shadow-md shadow-indigo-500/20 disabled:opacity-30 disabled:cursor-not-allowed">
+                <span>Lanjut</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+        </div>
+    </footer>
+
+    <div id="editor-modal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-2xl shadow-2xl flex flex-col max-h-[85vh] border border-slate-200 dark:border-slate-800">
+            <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-slate-900/50 rounded-t-2xl">
+                <div>
+                    <h3 class="font-bold text-slate-900 dark:text-white text-base">E-Modul </h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Coding nya E-Modul ini.</p>
+                </div>
+                <button onclick="toggleEditor()" class="text-slate-400 hover:text-slate-600 p-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <div class="p-4 flex-1 overflow-y-auto">
+                <textarea id="json-input" class="w-full h-96 font-mono text-xs p-4 border border-slate-300 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-slate-950 text-emerald-400 shadow-inner" spellcheck="false"></textarea>
+            </div>
+            <div class="p-4 border-t border-slate-200 dark:border-slate-800 flex justify-end space-x-2 bg-slate-50 dark:bg-slate-900/50 rounded-b-2xl">
+                <button onclick="toggleEditor()" class="px-4 py-2 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-700 dark:text-slate-300 font-medium bg-white dark:bg-slate-800 text-xs transition">Batal</button>
+                <button onclick="saveModuleData()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl shadow text-xs transition">Sinkronisasi & Terapkan</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // MASTER REACTIVE CORE STATE
+        let moduleData = {
+            title: "E-MODUL: BIJAK MENGGUNAKAN AI",
+            pages: [
+                {
+                    type: "cover",
+                    title: "E-MODUL: BIJAK MENGGUNAKAN AI",
+                    subtitle: "Panduan Literasi Digital Untuk Siswa SMA/SMK",
+                    author: "Oleh: Kelompok 3 <br> Media Pembelajaran TP A 25 <br> Funnies (010), Rasya (015), Intan (020), <br> Bita (031), Tita(105), Amanda (109)",
+                    bgImage: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80"
+                },
+                {
+                    type: "text",
+                    title: "Pendahuluan",
+                    content: `E-modul ini membahas tentang literasi digital berfokus pada penggunaan Kecerdasan Buatan (AI).<br>
+                    <div class="bg-indigo-50/50 dark:bg-indigo-950/20 border-l-4 border-indigo-500 p-4 rounded-r-xl my-4">
+                        <strong>Penyajian Materi:</strong> Materi disajikan mulai dari pengenalan dasar, manfaat nyata di sekolah, potensi bahaya, hingga panduan langkah demi langkah menggunakan AI dengan etika yang benar.
+                    </div>
+                    <br>
+                    Bahasa yang digunakan disesuaikan agar mudah dipahami siswa SMA/SMK, lengkap dengan contoh kasus sehari-hari.`
+                },
+                {
+                    type: "video",
+                    title: "Video Pengenalan Al",
+                    description: "Bagaimana Cara Kerja Al?",
+                    youtubeId: "vuo2nnus4SA"
+                },
+                {
+                    type: "pdf",
+                    title: "Materi Inti",
+                    description: "Kamu bisa langsung membaca dokumen PDF resmi materi di bawah ini tanpa harus mendownloadnya.",
+                    pdfUrl: "https://online.fliphtml5.com/fanes8623/vqmw/" 
+                    
+                },
+                {
+                    type: "interactive-quiz",
+                    title: "Uji Pemahaman",
+                    description: "Sistem akan memeriksa jawaban Anda secara langsung. Pilih salah satu jawaban yang Anda anggap paling akurat.",
+                    question: "Manakah dari Berikut ini adalah PENGGUNAAN YANG SALAH dari AI, yaitu …",
+                    options: [
+                        "Meenggunakan AI untuk menerjemahkan teks ke bahasa lain",
+                        "Menyalin seluruh jawaban AI dan mengirimkannya sebagai tugas pribadi",
+                        "Menggunakan AI untuk membantu menyusun ide dan kerangka presentasi",
+                        "Menggunakan AI untuk membantu mencari referensi materi pembelajaran."
+                    ],
+                    correctIndex: 1
+                }
+            ]
+        };
+
+        // UI State Management
+        let currentIndex = 0;
+        let currentFontSize = 16;
+        let viewedPages = new Set([0]); // Otomatis menganggap halaman cover sudah dilihat
+        let selectedQuizAnswer = null;
+        let quizSubmitted = false;
+
+        function initModule() {
+            // Set Dark Mode default berdasarkan preferensi sistem user
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+            
+            document.getElementById('modul-title').innerText = moduleData.title;
+            document.getElementById('json-input').value = JSON.stringify(moduleData, null, 4);
+            updateThemeIcon();
+            renderTOC();
+            renderPage();
+        }
+
+        function renderTOC() {
+            const tocList = document.getElementById('toc-list');
+            tocList.innerHTML = '';
+            
+            // Hitung persentase keterbacaan modul
+            const percent = Math.round((viewedPages.size / moduleData.pages.length) * 100);
+            document.getElementById('completion-badge').innerText = `${percent}% Selesai`;
+
+            moduleData.pages.forEach((page, index) => {
+                const isCurrent = index === currentIndex;
+                const isViewed = viewedPages.has(index);
+
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left px-3 py-2.5 rounded-xl text-xs font-medium transition flex items-center justify-between ${isCurrent ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/10' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'}`;
+                
+                btn.onclick = () => {
+                    currentIndex = index;
+                    viewedPages.add(index);
+                    selectedQuizAnswer = null; // reset state kuis lokal
+                    quizSubmitted = false;
+                    renderPage();
+                    if(window.innerWidth < 1024) toggleSidebar();
+                };
+
+                let icon = '📄';
+                if(page.type === 'cover') icon = '⚡';
+                if(page.type === 'video') icon = '📺';
+                if(page.type === 'pdf') icon = '📂';
+                if(page.type === 'interactive-quiz') icon = '🧪';
+
+                btn.innerHTML = `
+                    <div class="flex items-center space-x-2.5 truncate">
+                        <span class="text-sm opacity-90">${icon}</span>
+                        <span class="truncate ${isCurrent ? 'font-bold' : ''}">${page.title || 'Bab ' + (index+1)}</span>
+                    </div>
+                    ${isViewed && !isCurrent ? '<span class="text-emerald-500 text-xs font-bold">✓</span>' : ''}
+                `;
+                tocList.appendChild(btn);
+            });
+        }
+
+        function renderPage() {
+            const contentArea = document.getElementById('content-area');
+            const page = moduleData.pages[currentIndex];
+            if (!page) return;
+
+            let html = '';
+
+            switch(page.type) {
+                case 'cover':
+                    html = `
+                        <div class="text-center py-12 px-6 rounded-2xl relative overflow-hidden bg-cover bg-center text-white min-h-[420px] flex flex-col justify-center items-center" style="background-image: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(49, 46, 129, 0.95)), url('${page.bgImage}')">
+                            <span class="bg-indigo-500/20 text-indigo-300 border border-indigo-400/30 text-[10px] tracking-widest font-bold px-3 py-1 rounded-full uppercase mb-4"> E- MODUL Interaktif</span>
+                            <h2 class="text-2xl md:text-4xl font-extrabold tracking-tight max-w-2xl leading-tight mb-4">${page.title}</h2>
+                            <p class="text-slate-300 text-xs md:text-sm max-w-xl font-light mb-6">${page.subtitle || ''}</p>
+                            <div class="w-12 h-1 bg-gradient-to-r from-indigo-500 to-pink-500 rounded-full mb-6"></div>
+                            <p class="text-xs text-slate-400 tracking-wide">${page.author || ''}</p>
+                        </div>
+                    `;
+                    break;
+
+                case 'text':
+                    html = `
+                        <div class="max-w-none transition-all duration-200" style="font-size: ${currentFontSize}px">
+                            <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight border-b dark:border-slate-800 pb-3">${page.title}</h2>
+                            <div class="text-slate-600 dark:text-slate-300 leading-relaxed space-y-4">
+                                ${page.content}
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'video':
+                    html = `
+                        <div>
+                            <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 dark:text-white mb-1 tracking-tight">${page.title}</h2>
+                            <p class="text-xs text-slate-400 dark:text-slate-500 mb-4">${page.description || ''}</p>
+                            <div class="aspect-video w-full overflow-hidden rounded-2xl">
+                             <iframe
+                                 class="w-full h-full"
+                                 src="https://www.youtube.com/embed/${page.youtubeId}"
+                                 allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'pdf':
+                    html = `
+                        <div class="flex flex-col h-full">
+                            <h2 class="text-xl md:text-2xl font-extrabold text-slate-900 dark:text-white mb-1 tracking-tight">${page.title}</h2>
+                            <p class="text-xs text-slate-400 dark:text-slate-500 mb-4">${page.description || ''}</p>
+                            <div class="w-full rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800">
+                             <iframe
+                                src="${page.pdfUrl}"
+                                 class="w-full h-[70vh] md:h-[85vh]"
+                                  frameborder="0">
+                             </iframe>
+                        </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'interactive-quiz':
+                    html = `
+                        <div class="w-full max-w-2xl mx-auto py-4">
+                            <div class="bg-slate-50 dark:bg-slate-950 p-6 rounded-2xl border border-slate-200/60 dark:border-slate-800/60">
+                                <span class="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest block mb-1">Knowledge Check</span>
+                                <h2 class="text-lg md:text-xl font-bold text-slate-900 dark:text-white mb-4">${page.title}</h2>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">${page.description || ''}</p>
+                                
+                                <div class="p-4 bg-white dark:bg-slate-900 rounded-xl border dark:border-slate-800 font-semibold text-sm mb-4">
+                                    ${page.question}
+                                </div>
+
+                                <div class="space-y-2" id="quiz-options-container">
+                                    ${page.options.map((opt, oIdx) => `
+                                        <button onclick="selectQuizOption(${oIdx})" id="opt-${oIdx}" class="w-full text-left p-3 rounded-xl border text-xs font-medium transition flex items-center justify-between bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-indigo-500 dark:hover:border-indigo-400">
+                                            <span>${opt}</span>
+                                            <span class="w-4 h-4 rounded-full border border-slate-300 dark:border-slate-700 inline-block shrink-0 ml-2" id="radio-${oIdx}"></span>
+                                        </button>
+                                    `).join('')}
+                                </div>
+
+                                <button onclick="submitQuizAnswer()" id="quiz-submit-btn" class="w-full mt-6 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold p-3 rounded-xl text-xs tracking-wide transition shadow-md">
+                                    Verifikasi Jawaban Saya
+                                </button>
+                                
+                                <div id="quiz-feedback" class="mt-4 hidden p-3 rounded-xl text-xs font-semibold text-center"></div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+
+            contentArea.innerHTML = html;
+            updateNavigation();
+        }
+
+        // Quiz Interactive Logic
+        function selectQuizOption(index) {
+            if (quizSubmitted) return;
+            selectedQuizAnswer = index;
+            
+            const page = moduleData.pages[currentIndex];
+            page.options.forEach((_, oIdx) => {
+                const btn = document.getElementById(`opt-${oIdx}`);
+                const radio = document.getElementById(`radio-${oIdx}`);
+                if(oIdx === index) {
+                    btn.className = btn.className.replace(/border-slate-200|dark:border-slate-800/g, 'border-indigo-600 dark:border-indigo-400 bg-indigo-50/20');
+                    radio.className = "w-4 h-4 rounded-full border-4 border-indigo-600 dark:border-indigo-400 inline-block shrink-0 ml-2";
+                } else {
+                    btn.className = "w-full text-left p-3 rounded-xl border text-xs font-medium transition flex items-center justify-between bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-indigo-500";
+                    radio.className = "w-4 h-4 rounded-full border border-slate-300 dark:border-slate-700 inline-block shrink-0 ml-2";
+                }
+            });
+        }
+
+        function submitQuizAnswer() {
+            if (selectedQuizAnswer === null || quizSubmitted) return;
+            quizSubmitted = true;
+            
+            const page = moduleData.pages[currentIndex];
+            const feedback = document.getElementById('quiz-feedback');
+            const submitBtn = document.getElementById('quiz-submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.className += " opacity-50 cursor-not-allowed";
+
+            feedback.classList.remove('hidden');
+            if(selectedQuizAnswer === page.correctIndex) {
+                feedback.className += " bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/50";
+                feedback.innerText = "🎉 Brilian! Jawaban Anda terverifikasi 100% benar.";
+            } else {
+                feedback.className += " bg-rose-50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50";
+                feedback.innerText = `❌ Kurang tepat. Jawaban benar: "${page.options[page.correctIndex]}"`;
+            }
+        }
+
+        // Accessibility Adjuster
+        function changeFontSize(step) {
+            currentFontSize = Math.max(12, Math.min(24, currentFontSize + step));
+            renderPage();
+        }
+
+        // Theme Switch Engine
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+            updateThemeIcon();
+        }
+
+        function updateThemeIcon() {
+            const icon = document.getElementById('theme-icon');
+            if (document.documentElement.classList.contains('dark')) {
+                icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m2.828-9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />`;
+            } else {
+                icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />`;
+            }
+        }
+
+        function updateNavigation() {
+            const total = moduleData.pages.length;
+            document.getElementById('page-indicator').innerText = currentIndex + 1;
+            document.getElementById('total-indicator').innerText = total;
+
+            document.getElementById('btn-prev').disabled = currentIndex === 0;
+            document.getElementById('btn-next').disabled = currentIndex === total - 1;
+
+            const progressPercent = total > 1 ? (currentIndex / (total - 1)) * 100 : 100;
+            document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+
+            renderTOC();
+        }
+
+        function nextPage() {
+            if (currentIndex < moduleData.pages.length - 1) {
+                currentIndex++;
+                viewedPages.add(currentIndex);
+                selectedQuizAnswer = null;
+                quizSubmitted = false;
+                renderPage();
+            }
+        }
+
+        function prevPage() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderPage();
+            }
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('hidden');
+            if (!sidebar.classList.contains('hidden') && window.innerWidth < 1024) {
+                sidebar.className += " fixed inset-y-0 left-0 z-50 bg-white dark:bg-slate-900 m-4 shadow-2xl block";
+            }
+        }
+
+        function toggleEditor() {
+            document.getElementById('editor-modal').classList.toggle('hidden');
+        }
+
+        function saveModuleData() {
+            try {
+                const jsonText = document.getElementById('json-input').value;
+                const parsed = JSON.parse(jsonText);
+                if(!parsed.pages || parsed.pages.length === 0) return alert('Data tidak valid.');
+                
+                moduleData = parsed;
+                currentIndex = 0;
+                viewedPages = new Set([0]);
+                initModule();
+                toggleEditor();
+            } catch (e) {
+                alert("JSON Error: " + e.message);
+            }
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (document.activeElement.tagName === 'TEXTAREA') return;
+            if (e.key === 'ArrowRight') nextPage();
+            if (e.key === 'ArrowLeft') prevPage();
+        });
+
+        window.onload = initModule;
+    </script>
+</body>
+</html>
